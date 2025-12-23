@@ -27,6 +27,18 @@ catch (err) {
       throw err; 
     }
 }
+async getAll(){
+  try {
+    const url = await this.urlRepository.getAll();
+    return url;
+    
 }
+catch (err) {
+      console.error("Service layer error:", err);
+      throw err; 
+    }
+}
+}
+
 
 export default UrlService;

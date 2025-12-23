@@ -88,7 +88,7 @@ export const analytics = async (req, res) => {
 }
 export const getAll=async(req,res)=>{   
     try{
-        const url=await Url.find({});
+        const url=await urlService.getAll();
         return res.status(200).json({
             data: url,
             success: true,

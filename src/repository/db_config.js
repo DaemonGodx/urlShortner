@@ -35,6 +35,16 @@ class UrlRepository {
       throw err;
     }
   }
+  async getAll(){
+    try {
+      const url = await Url.find({});
+      return url;
+}catch(err)
+{
+   console.error("Repository layer error:", err);
+      throw err;
+}
+  }
 }
 
 export default UrlRepository;
