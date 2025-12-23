@@ -1,12 +1,13 @@
 import Url from "../models/url.js";
 
 class UrlRepository {
-  async createSortid(shortId, redirectUrl) {
+  async createSortid(shortId, redirectUrl, createdBy) {
     try {
       const create = await Url.create({
         shortId,
         redirectUrl,
         visitHistory: [],
+        createdBy,
       });
       return create;
     } catch (err) {
@@ -35,9 +36,9 @@ class UrlRepository {
       throw err;
     }
   }
-  async getAll(){
+  async getAll(createdBy){
     try {
-      const url = await Url.find({});
+      const url = await Url.find({createdBy});
       return url;
 }catch(err)
 {

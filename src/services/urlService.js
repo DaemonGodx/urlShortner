@@ -6,10 +6,10 @@ class UrlService {
     this.urlRepository = new UrlRepository();
   }
 
-  async createShortId(redirectUrl) {
+  async createShortId(redirectUrl, createdBy) {
     try {
       const shId = shortid.generate();
-      const create = await this.urlRepository.createSortid(shId, redirectUrl);
+      const create = await this.urlRepository.createSortid(shId, redirectUrl, createdBy);
       return create;
     } catch (err) {
       console.error("Service layer error:", err);
@@ -27,9 +27,9 @@ catch (err) {
       throw err; 
     }
 }
-async getAll(){
+async getAll(createdBy){
   try {
-    const url = await this.urlRepository.getAll();
+    const url = await this.urlRepository.getAll(createdBy);
     return url;
     
 }

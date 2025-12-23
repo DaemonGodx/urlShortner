@@ -2,8 +2,26 @@ import express from "express";
 const staticRoute= express.Router();
 import urlService from "../services/urlService.js"
 const urlservice=new urlService()
-staticRoute.get("/",async (req,res)=>{
-    const url1=await  urlservice.getAll()
-    res.render("home",{url:url1})
+staticRoute.get("/", async (req, res) => {
+  if (!req.user) {
+    return res.render("welcome");
+  }
+
+  const urls = await urlservice.getAll(req.user._id);
+
+  return res.render("home", {
+    url: urls,
+    user: req.user
+  });
+});
+staticRoute.get("/signup",(req,res)=>{
+    res.render("signup")
 })
+staticRoute.get("/login",(req,res)=>{
+    res.render("login")
+})
+staticRoute.post("/logout", (req, res) => {
+  res.clearCookie("uid");
+  res.redirect("/");
+});
 export default staticRoute

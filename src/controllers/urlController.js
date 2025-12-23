@@ -5,14 +5,8 @@ const urlService = new UrlService();
 
 export const createShortId = async (req, res) => {
     try {
-        const shortId = await urlService.createShortId(req.body.redirectUrl);
-
-        return res.status(201).json({
-            success: true,
-            data: shortId,
-            message: "success",
-            error: false
-        });
+        const shortId = await urlService.createShortId(req.body.redirectUrl, req.user._id);
+        return res.render("home",{id:shortId.shortId})
 
     } catch (err) {
         return res.status(500).json({
