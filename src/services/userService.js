@@ -1,8 +1,10 @@
 import UserRepo from "../repository/userRepo.js";
 import bcrypt from "bcrypt";
-import { v4 as uuidv4 } from "uuid";
+// import { v4 as uuidv4 } from "uuid";
 
-const sessionIdToUserMap = new Map();
+// const sessionIdToUserMap = new Map();
+import JWT from "jsonwebtoken"; 
+const secret="Pritam@1234"
 
 class UserServices {
     constructor() {
@@ -35,9 +37,9 @@ class UserServices {
                 throw new Error("Incorrect password");
             }
 
-            const sessionId = uuidv4();
-
-            this.setUser(sessionId, user);
+            // const sessionId = uuidv4();
+            // this.setUser(sessionId, user);
+            const sessionId=this.setUser(user);
 
             return { sessionId, user };
 
@@ -56,12 +58,32 @@ class UserServices {
         }
     }
 
-    setUser(sessionId, user) {
-        sessionIdToUserMap.set(sessionId, user);
-    }
+    // setUser(sessionId, user)  {
+    //    sessionIdToUserMap.set(sessionId, user);
+    // }
+   setUser(user) {
+    const token = JWT.sign(
+        { user: user },
+        secret,
+        { expiresIn: "15m" }
+    );
 
-    getUser(sessionId) {
-        return sessionIdToUserMap.get(sessionId);
+    return token;
+}
+
+
+    // getUser(sessionId) {
+    //     return sessionIdToUserMap.get(sessionId);
+    // }
+     getUser(token) {
+        if(!token) return null;
+        try {
+            return JWT.verify(token,secret);
+        } catch (error) {
+             console.log(error);
+        }
+            
+       
     }
 }
 

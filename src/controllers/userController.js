@@ -20,7 +20,10 @@ export const login=async(req,res)=>{
       error: "Invalid Username or Password",
     });}
      res.cookie("uid", sessionId);
-  return res.redirect("/");
+    // res.json({sessionId}) 
+    console.log(user)
+    return res.redirect("/");
+    
 }catch(err){
     return res.render("login", {
       error: err.message,

@@ -2,6 +2,7 @@ import express from "express";
 const staticRoute= express.Router();
 import urlService from "../services/urlService.js"
 const urlservice=new urlService()
+import { restrictedTo } from "../middlewares/auth.js";
 staticRoute.get("/", async (req, res) => {
   if (!req.user) {
     return res.render("welcome");
