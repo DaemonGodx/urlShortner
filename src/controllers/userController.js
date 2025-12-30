@@ -21,7 +21,6 @@ export const login=async(req,res)=>{
     });}
      res.cookie("uid", sessionId);
     // res.json({sessionId}) 
-    console.log(user)
     return res.redirect("/");
     
 }catch(err){

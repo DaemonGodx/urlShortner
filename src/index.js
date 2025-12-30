@@ -5,7 +5,8 @@ import connect from "./connection/connection.js";
 import route from "./routes/index.js"
 import staticRoute from "./routes/staticRoute.js"
 import userRoute from "./routes/user.js"
-const url="mongodb://127.0.0.1:27017/short-url"
+import { MONGO_URL } from "./config/config.js";
+const url=MONGO_URL;
 import { checkAuth,restrictedTo  } from "./middlewares/auth.js";
 connect(url);
 app.use(express.json());
