@@ -74,6 +74,15 @@
             border: 1px solid #ccc;
             font-size: 14px;
         }
+        input[type="url"] {
+            padding: 10px;
+            width: 70%;
+            max-width: 400px;
+            margin-right: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
 
         .success-box {
             background: #e8f5e9;
@@ -187,7 +196,7 @@
             <!-- URL FORM -->
             <form action="/url" method="POST">
                 <label><strong>Enter your URL:</strong></label><br /><br />
-                <input type="text" name="redirectUrl" placeholder="https://www.example.com" required />
+                <input type="url" name="redirectUrl" placeholder="www.example.com" required />
                 <button type="submit">Shorten</button>
             </form>
 
@@ -202,8 +211,8 @@
                             <th>Original URL</th>
                             <th>Short URL</th>
                             <th>Clicks</th>
-                            <th>Visit</th>
-                            <th>Delete</th>
+                            <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
