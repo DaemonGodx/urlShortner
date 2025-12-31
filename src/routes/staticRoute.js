@@ -5,7 +5,7 @@ const urlservice=new urlService()
 import { restrictedTo } from "../middlewares/auth.js";
 staticRoute.get("/", async (req, res) => {
   if (!req.user) {
-    return res.render("welcome");
+    return res.render("Welcome");
   }
 
   const urls = await urlservice.getAll(req.user._id);
